@@ -1,6 +1,6 @@
 data "external" "rds_final_snapshot_exists" {
     program = [
-        "./check-rds-snapshot.sh",
+        "${path.module}/check-rds-snapshot.sh",
         var.db_identifier
     ]
 }
