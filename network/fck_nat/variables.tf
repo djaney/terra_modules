@@ -1,15 +1,26 @@
-variable vpc {
-  type        = map
+variable vpc_id {
+  type        = string
   description = "VPC object"
 }
 
-variable subnets {
-  type        = list
+variable route_table_id {
+  type        = string
+  description = "route table id"
+}
+
+
+variable nat_subnet_id {
+  type        = string
+  description = "Subnet to put NAT"
+}
+
+variable subnet_ids {
+  type        = list(string)
   description = "List of private subnets"
 }
 
-variable one_nat_for_each_subnet {
-  type        = bool
-  default     = false
-  description = "True if each private subnet gets it's own NAT gateway"
+variable "instance_type" {
+  description = "Instance type to use for the NAT instance"
+  type        = string
+  default     = "t4g.nano"
 }

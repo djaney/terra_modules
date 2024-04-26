@@ -1,5 +1,4 @@
 variable vpc {
-    type        = map
     description = "VPC object"
 }
 
@@ -36,7 +35,7 @@ variable subnet_ids {
 
 variable allocated_storage {
     type        = number
-    default     = 10
+    default     = 50
     description = "GB of data to be allocated. Cannot scale down."
 }
 

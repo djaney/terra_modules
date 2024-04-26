@@ -31,7 +31,7 @@ resource "aws_db_instance" "db" {
 
     maintenance_window = "Tue:05:00-Tue:07:00"
 
-    vpc_security_group_ids = [aws_security_group.allow_db_access]
+    vpc_security_group_ids = [aws_security_group.allow_db_access.id]
 
     db_subnet_group_name = aws_db_subnet_group.main.name
 
