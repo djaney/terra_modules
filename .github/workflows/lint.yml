@@ -1,0 +1,12 @@
+on:
+  push:
+    branches: [main]
+name: Lint
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: hashicorp/setup-terraform@v3
+    - run: ./lint.sh
