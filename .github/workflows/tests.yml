@@ -2,9 +2,9 @@ on:
   push:
     branches:
       - main
-name: Lint
+name: Tests
 jobs:
-  lint:
+  Lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
