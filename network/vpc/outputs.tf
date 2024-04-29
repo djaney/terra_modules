@@ -5,6 +5,13 @@ output private_subnets {
   depends_on  = [aws_subnet.private]
 }
 
+output main_route_table_id {
+  value       = aws_vpc.main.main_route_table_id
+  sensitive   = false
+  description = "Main route table ID"
+  depends_on  = [aws_vpc.main]
+}
+
 output public_subnets {
   value       = aws_subnet.public
   sensitive   = false
@@ -12,8 +19,8 @@ output public_subnets {
   depends_on  = [aws_subnet.public]
 }
 
-output vpc {
-  value       = aws_vpc.main
-  description = "VPC object"
+output vpc_id {
+  value       = aws_vpc.main.id
+  description = "VPC ID"
   depends_on  = [aws_vpc.main]
 }

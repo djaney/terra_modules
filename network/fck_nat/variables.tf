@@ -3,12 +3,6 @@ variable vpc_id {
   description = "VPC object"
 }
 
-variable route_table_id {
-  type        = string
-  description = "route table id"
-}
-
-
 variable nat_subnet_id {
   type        = string
   description = "Subnet to put NAT"

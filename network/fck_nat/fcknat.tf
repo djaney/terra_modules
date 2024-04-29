@@ -6,6 +6,26 @@ module "nat" {
     subnet_id            = var.nat_subnet_id
     instance_type        = var.instance_type
     use_cloudwatch_agent = true 
-    update_route_table   = true
-    route_table_id       = var.route_table_id
+    update_route_table   = false
+}
+
+resource "aws_route_table" "private" {
+  vpc_id = var.vpc_id
+
+  tags = {
+    Name = "Fcknat"
+  }
+}
+
+resource "aws_route" "private" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  network_interface_id   = module.nat.eni_id
+}
+
+# Make NAT available in private subnets
+resource "aws_route_table_association" "a" {
+  for_each       = toset(var.subnet_ids)
+  subnet_id      = each.value
+  route_table_id = aws_route_table.private.id
 }

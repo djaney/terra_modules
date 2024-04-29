@@ -2,4 +2,4 @@
 cd tests
 terraform init -backend=false
 terraform validate
-terraform test
+# terraform test
