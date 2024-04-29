@@ -7,6 +7,5 @@ variables {
         id = "subnet-27fcf150"
     }]
 }
-run "validate" {
-    command = plan
+run "integration_test" {
 }
