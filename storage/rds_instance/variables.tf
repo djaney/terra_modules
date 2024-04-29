@@ -1,5 +1,5 @@
-variable vpc {
-    description = "VPC object"
+variable vpc_id {
+    description = "VPC ID"
 }
 
 variable db_identifier {

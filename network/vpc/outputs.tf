@@ -1,5 +1,5 @@
-output private_subnets {
-  value       = aws_subnet.private
+output private_subnet_ids {
+  value       = aws_subnet.private[*].id
   sensitive   = false
   description = "List of private subnets"
   depends_on  = [aws_subnet.private]
@@ -12,8 +12,8 @@ output main_route_table_id {
   depends_on  = [aws_vpc.main]
 }
 
-output public_subnets {
-  value       = aws_subnet.public
+output public_subnet_ids {
+  value       = aws_subnet.public[*].id
   sensitive   = false
   description = "List of public subnets"
   depends_on  = [aws_subnet.public]
