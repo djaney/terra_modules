@@ -1,31 +1,26 @@
 # Some terraform modules to make life easier
 
-Just look at the modules and inspect `variables.tf` and `outputs.tf` for input and output
+This are just some opinionated structure that I use in my projects.
 
-## network/vpc
-Simple VPC setup.
-Add internet gateways
-Create subnet for each AZ.
+Individual documentation is located inside each module.
+Just look at the modules and inspect `variables.tf` and `outputs.tf` for input and output.
 
-## network/fck_nat
-Setup NAT using ec2 instances with fcknat framework.
-Add routing tables pointing to NAT instances
+Generally resources are grouped into layers based on how often they change.
 
-## storage/rds_instance
-Simple RDS instance.
-If instance is re-created by terraform, it will automatically load data from previous instance.
-Heavily inspired by https://dev.to/stack-labs/restore-aws-rds-snapshots-using-terraform-1ffi
+It's also useful when you need to populate data to a layer before you create the next. 
+For example in ECS tasks, you can create the ECR first, push some images, then create the ECS. 
+This way, your task will not be in a state where there are no valid images in the ECR.
 
-## ECS
+Each layer can be connected by Terragrunt using `dependency` block:
 
-### ECS cluster (TODO)
-Infrastructure where to run your tasks
+1. **Network** - Network related. Mostly resources that almost never changes.
 
-### ECS Task (TODO)
-Instructions on what containers to run. Can run multiple containers in 1 task
+   Example: VPC, NAT, ALB
 
-### ECS Service (TODO)
-Optional ontroller for tasks. Makes sure the required minimum tasks instances are running.
+2. **Storage** - Stateful resources.
+   They also seldom change but more often than network layers, so they get their own layer.
 
-This is optional. Tasks without a service are useful for scheduled operations.
+   Example: S3, database, ECR
+
+3. **Other** - any stateless resources.
 

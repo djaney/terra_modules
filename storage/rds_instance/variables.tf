@@ -37,6 +37,10 @@ variable allocated_storage {
     type        = number
     default     = 50
     description = "GB of data to be allocated. Cannot scale down."
+    validation {
+        condition = var.allocated_storage >= 50
+        error_message = "Cannot be less than 50"
+    }
 }
 
 
