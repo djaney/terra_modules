@@ -28,8 +28,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Terraform docs
-        uses: terraform-docs/gh-actions@v1.1.0
+      - uses: lablabs/setup-terraform-docs@v1
+        name: Setup Terraform docs
+        with:
+          terraform_docs_version: v0.17.1
       - name: Generate documentation
         run: ./generate_docs.sh
       - name: Setup Pages
