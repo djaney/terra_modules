@@ -12,7 +12,16 @@ for g in $(ls -d */); do
   g=$(echo $g | sed 's:/*$::')
   for m in $(ls $DIR/$g); do
     printf -v nn "%03d" $n
-    terraform-docs -c .terraform.docs.yml $DIR/$g/$m >> $DOCS_DIR/${nn}_${g}_${m}.md
+    FILENAME=$DOCS_DIR/${nn}_${g}_${m}.md
+    cat > $FILENAME <<EOL
+---
+layout: page
+title:  ${g} ${m}
+---
+
+...
+EOL
+    terraform-docs -c .terraform.docs.yml $DIR/$g/$m >> $FILENAME
     ((n++))
   done;
 done;
