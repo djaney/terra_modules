@@ -32,9 +32,9 @@ jobs:
         run: |
           echo "https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz"
           curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz
-          ls
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
+          ls
           mv terraform-docs $HOME/.local/bin
           ls $HOME/.local/bin
           ./generate_docs.sh
