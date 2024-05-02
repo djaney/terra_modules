@@ -16,10 +16,9 @@ for g in $(ls -d */); do
     cat > $FILENAME <<EOL
 ---
 layout: page
-title:  ${g} ${m}
+title:  ${g}/${m}
 ---
 
-...
 EOL
     terraform-docs -c .terraform.docs.yml $DIR/$g/$m >> $FILENAME
     ((n++))
