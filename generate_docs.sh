@@ -13,12 +13,17 @@ for g in $(ls -d */); do
   for m in $(ls $DIR/$g); do
     printf -v nn "%03d" $n
     FILENAME=$DOCS_DIR/${nn}_${g}_${m}.md
+    CONTENT=""
+    if [[ -f $DIR/$g/$m/readme.md ]]; then
+      CONTENT=$(cat $DIR/$g/$m/readme.md)
+    fi
     cat > $FILENAME <<EOL
 ---
 layout: page
 title:  ${g}/${m}
 permalink: /${g}/${m}/
 ---
+${CONTENT}
 
 EOL
     terraform-docs -c .terraform.docs.yml $DIR/$g/$m >> $FILENAME
