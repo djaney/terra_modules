@@ -35,7 +35,6 @@ jobs:
           chmod +x terraform-docs
           mkdir -p $HOME/.local/bin
           mv terraform-docs $HOME/.local/bin
-          ls $HOME/.local/bin
           ./generate_docs.sh
       - name: Setup Pages
         uses: actions/configure-pages@v5
