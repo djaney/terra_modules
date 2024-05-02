@@ -31,7 +31,7 @@ jobs:
       - uses: lablabs/setup-terraform-docs@v1
         name: Setup Terraform docs
         with:
-          terraform_docs_version: v0.17.1
+          terraform_docs_version: latest
       - name: Generate documentation
         run: ./generate_docs.sh
       - name: Setup Pages
