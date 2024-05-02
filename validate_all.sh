@@ -2,9 +2,9 @@
 set -e
 DIR=$(pwd)
 for i in $(ls tests); do 
-    cd "$DIR/tests/$i";
-    echo "Validating $i"
-    terraform init -backend=false > /dev/null
-    terraform validate
+  cd "$DIR/tests/$i";
+  echo "Validating $i"
+  terraform init -backend=false > /dev/null
+  terraform validate
 done;
 echo "Done validating"

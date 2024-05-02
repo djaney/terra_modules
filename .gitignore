@@ -2,3 +2,6 @@
 .terraform.*
 *.tfstate
 *.tfstate.backup
+/docs/docs/*
+!/docs/docs/.gitkeep
+_site

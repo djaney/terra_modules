@@ -11,6 +11,7 @@ It's also useful when you need to populate data to a layer before you create the
 For example in ECS tasks, you can create the ECR first, push some images, then create the ECS. 
 This way, your task will not be in a state where there are no valid images in the ECR.
 
+## Layers
 Each layer can be connected by Terragrunt using `dependency` block:
 
 1. **Network** - Network related. Mostly resources that almost never changes.
@@ -24,3 +25,5 @@ Each layer can be connected by Terragrunt using `dependency` block:
 
 3. **Other** - any stateless resources.
 
+## Auto documentation
+1. Install https://terraform-docs.io/
