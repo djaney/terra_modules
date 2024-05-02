@@ -17,6 +17,7 @@ for g in $(ls -d */); do
 ---
 layout: page
 title:  ${g}/${m}
+permalink: /${g}/${m}/
 ---
 
 EOL
