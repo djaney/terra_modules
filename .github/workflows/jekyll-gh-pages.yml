@@ -30,10 +30,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Terraform docs
         run: |
+          echo $PATH
+          echo $HOME
           curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
-          mv terraform-docs /usr/bin/terraform-docs
+          mv terraform-docs $HOME/.local/bin
       - name: Generate documentation
         run: ./generate_docs.sh
       - name: Setup Pages
