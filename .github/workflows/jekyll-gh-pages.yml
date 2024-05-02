@@ -33,8 +33,8 @@ jobs:
           curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.17.0/terraform-docs-v0.17.0-$(uname)-amd64.tar.gz
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
-          echo $HOME
           mv terraform-docs $HOME/.local/bin
+          ls $HOME/.local/bin
           terraform-docs -v
       - name: Generate documentation
         run: ./generate_docs.sh
