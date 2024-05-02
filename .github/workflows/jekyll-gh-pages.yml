@@ -34,7 +34,7 @@ jobs:
           tar -xzf terraform-docs.tar.gz
           chmod +x terraform-docs
           mv terraform-docs $HOME/.local/bin
-          which terraform-docs
+          terraform-docs -v
       - name: Generate documentation
         run: ./generate_docs.sh
       - name: Setup Pages
