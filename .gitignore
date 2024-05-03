@@ -5,4 +5,6 @@
 !.terraform.docs.yml
 /docs/docs/*
 !/docs/docs/.gitkeep
+/docs/examples/*
+!/docs/examples/.gitkeep
 _site
