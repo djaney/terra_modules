@@ -2,13 +2,13 @@ provider "aws" {
     region = "ap-southeast-1"
 }
 module "vpc" {
-    source = "../../network/vpc"
+    source = "../../src/network/vpc"
     name   = "Test"
 }
 
 # Nat
 module "nat" {
-    source        = "../../network/fck_nat"
+    source        = "../../src/network/fck_nat"
     vpc_id        = module.vpc.vpc_id
     nat_subnet_id = module.vpc.public_subnet_ids[0]
     subnet_ids    = module.vpc.private_subnet_ids
@@ -46,7 +46,7 @@ resource "aws_iam_role" "task_role" {
 
 # Create balancer
 module "balancer" {
-    source            = "../../network/load_balancer"
+    source            = "../../src/network/load_balancer"
     vpc_id            = module.vpc.vpc_id
     name              = "test-balancer"
     public_subnet_ids = module.vpc.public_subnet_ids
@@ -60,7 +60,7 @@ module "balancer" {
 
 # Create web service
 module "service" {
-    source            = "../../ecs/ecs_service_web"
+    source            = "../../src/ecs/ecs_service_web"
     name              = "web-service"
     vpc_id            = module.vpc.vpc_id
     subnet_ids        = module.vpc.private_subnet_ids

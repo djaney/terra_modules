@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-DIR=$(pwd)
+DIR="$(pwd)"
 for i in $(ls examples); do
   cd "$DIR/examples/$i";
   echo "Testing $i"
