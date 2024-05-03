@@ -1,14 +1,14 @@
 resource "aws_kms_key" "log" {
-  description             = "${var.name}-logs-key"
+  description             = "${var.cluster_name}-logs-key"
   deletion_window_in_days = 7
 }
 
 resource "aws_cloudwatch_log_group" "main" {
-  name = "${var.name}-logs"
+  name = "${var.cluster_name}-logs"
 }
 
 resource "aws_ecs_cluster" "main" {
-  name = var.name
+  name = var.cluster_name
 
   configuration {
     execute_command_configuration {

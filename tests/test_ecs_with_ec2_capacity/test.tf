@@ -18,17 +18,12 @@ module "nat" {
 
 
 # Define cluster
-module "ecs_cluster" {
-    source     = "../../ecs/ecs_cluster"
-    name       = "test"
-    depends_on = [module.vpc]
-}
 
 # Add capacity provider
-module "ecs_capacity_provider" {
-    source       = "../../ecs/ecs_capacity_ec2"
+module "cluster" {
+    source       = "../../ecs/ecs_ec2_cluster"
     vpc_id       = module.vpc.vpc_id
-    cluster_name = module.ecs_cluster.cluster_name
+    cluster_name = "test-cluster"
     asg_scaling  = {
         min    = 1
         max    = 1
@@ -36,7 +31,7 @@ module "ecs_capacity_provider" {
     }
     subnet_ids         = module.vpc.private_subnet_ids
     target_utilization = 90
-    depends_on         = [module.vpc, module.ecs_cluster]
+    depends_on         = [module.vpc]
 }
 
 # Dummy task role
@@ -78,7 +73,7 @@ module "service" {
     source            = "../../ecs/ecs_service_web"
     name              = "web-service"
     vpc_id            = module.vpc.vpc_id
-    cluster_id        = module.ecs_cluster.cluster_id
+    cluster_id        = module.cluster.cluster_id
     image             = "chentex/go-rest-api"
     task_cpu          = 10
     task_memory       = 512
@@ -99,5 +94,5 @@ module "service" {
         matcher             = "401,200"
     }
 
-    depends_on        = [module.balancer, aws_iam_role.task_role, module.ecs_cluster, module.vpc]
+    depends_on        = [module.balancer, aws_iam_role.task_role, module.cluster, module.vpc]
 }
