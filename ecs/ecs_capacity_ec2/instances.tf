@@ -1,17 +1,25 @@
 resource "aws_iam_instance_profile" "ecs_agent" {
-  name = "${var.cluster_name}-ecs-agent"
+  name = "${var.cluster_name}-ecs-agt"
   role = aws_iam_role.ecs_agent.name
 }
 
 resource "aws_launch_template" "engine" {
-  name          = "${var.cluster_name}-template"
+  name          = "${var.cluster_name}-tmpl"
   image_id      = local.ecs_image_ami_id
   instance_type = var.instance_type
-  user_data     = base64encode("#!/bin/bash\necho ECS_CLUSTER=my-cluster >> /etc/ecs/ecs.config")
+  user_data     = base64encode("#!/bin/bash\necho ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config")
 
   vpc_security_group_ids = [aws_security_group.ecs_sg.id]
   iam_instance_profile {
     name = aws_iam_instance_profile.ecs_agent.name
+  }
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "ECS - ${var.cluster_name}"
+    }
   }
 }
 
