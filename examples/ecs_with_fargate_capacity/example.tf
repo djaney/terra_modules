@@ -8,10 +8,10 @@ module "vpc" {
 
 # Nat
 module "nat" {
-    source = "../../network/fck_nat"
-    vpc_id = module.vpc.vpc_id
+    source        = "../../network/fck_nat"
+    vpc_id        = module.vpc.vpc_id
     nat_subnet_id = module.vpc.public_subnet_ids[0]
-    subnet_ids = module.vpc.private_subnet_ids
+    subnet_ids    = module.vpc.private_subnet_ids
 
     depends_on = [module.vpc]
 }
@@ -20,18 +20,8 @@ module "nat" {
 # Define cluster
 
 # Add capacity provider
-module "cluster" {
-    source       = "../../ecs/ecs_ec2_cluster"
-    vpc_id       = module.vpc.vpc_id
-    cluster_name = "test-cluster"
-    asg_scaling  = {
-        min    = 1
-        max    = 1
-        target = 1
-    }
-    subnet_ids         = module.vpc.private_subnet_ids
-    target_utilization = 90
-    depends_on         = [module.vpc]
+resource "aws_ecs_cluster" "cluster" {
+    name = "test-cluster"
 }
 
 # Dummy task role
@@ -61,7 +51,7 @@ module "balancer" {
     name              = "test-balancer"
     public_subnet_ids = module.vpc.public_subnet_ids
     ingress_ports     = [80]
-    http = {
+    http              = {
         port = 80
     }
     depends_on = [module.vpc]
@@ -73,17 +63,19 @@ module "service" {
     source            = "../../ecs/ecs_service_web"
     name              = "web-service"
     vpc_id            = module.vpc.vpc_id
-    cluster_id        = module.cluster.cluster_id
+    subnet_ids        = module.vpc.private_subnet_ids
+    cluster_id        = aws_ecs_cluster.cluster.id
     image             = "chentex/go-rest-api"
-    task_cpu          = 10
+    task_cpu          = 256
     task_memory       = 512
     container_port    = 8080
     task_role_arn     = aws_iam_role.task_role.arn
     load_balancer_arn = module.balancer.alb_arn
-    http = {
-        priority = 1
+    http              = {
+        priority     = 1
         listener_arn = module.balancer.http_listener_arn
     }
+    fargate = true
 
     health_check = {
         path                = "/test"
@@ -94,5 +86,5 @@ module "service" {
         matcher             = "401,200"
     }
 
-    depends_on        = [module.balancer, aws_iam_role.task_role, module.cluster, module.vpc]
+    depends_on = [module.balancer, aws_iam_role.task_role, aws_ecs_cluster.cluster, module.vpc]
 }

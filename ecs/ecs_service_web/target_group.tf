@@ -4,6 +4,8 @@ resource "aws_lb_target_group" "main" {
     port     = var.container_port
     vpc_id   = var.vpc_id
 
+    target_type = var.fargate ? "ip" : "instance"
+
     health_check {
         path                = var.health_check.path
         healthy_threshold   = var.health_check.healthy_threshold

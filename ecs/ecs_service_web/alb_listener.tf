@@ -18,6 +18,7 @@ resource "aws_lb_listener_rule" "https" {
     tags = {
         Name = "${var.name} HTTPS Listener"
     }
+    depends_on = [aws_lb_target_group.main]
 }
 resource "aws_lb_listener_rule" "http" {
     count        = var.http.priority >= 0 ? 1 : 0
@@ -39,4 +40,5 @@ resource "aws_lb_listener_rule" "http" {
     tags = {
         Name = "${var.name} HTTP Listener"
     }
+    depends_on = [aws_lb_target_group.main]
 }
