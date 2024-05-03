@@ -25,5 +25,5 @@ Each layer can be connected by Terragrunt using `dependency` block:
 
 3. **Other** - any stateless resources.
 
-## Auto documentation
-1. Install https://terraform-docs.io/
+## Documentation
+[https://djaney.github.io/terra_modules/](https://djaney.github.io/terra_modules/)
