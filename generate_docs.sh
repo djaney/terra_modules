@@ -54,6 +54,8 @@ EOL)
   cat > $FILENAME <<EOL
 ${FRONT_MATTER}
 ${CONTENT}
+
+
 \`\`\`
 ${EXAMPLE}
 \`\`\`
