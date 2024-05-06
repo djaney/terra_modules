@@ -1,7 +1,24 @@
+locals {
+    db_username = "root"
+}
 resource "random_password" "db_password" {
   length           = 16
   special          = true
   override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+resource "aws_ssm_parameter" "db_username" {
+  name        = "/${var.ssm_namespace}/db/${var.db_identifier}/username"
+  description = "Database username"
+  type        = "SecureString"
+  value       = local.db_username
+}
+
+resource "aws_ssm_parameter" "db_password" {
+  name        = "/${var.ssm_namespace}/db/${var.db_identifier}/password"
+  description = "Database password"
+  type        = "SecureString"
+  value       = random_password.db_password.result
 }
 
 resource "aws_db_instance" "db" {

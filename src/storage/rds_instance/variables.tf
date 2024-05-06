@@ -44,5 +44,8 @@ variable allocated_storage {
 }
 
 
-
+variable "ssm_namespace" {
+    type = string
+    description = "Will create ssm parameter names /{namespace}/db/{db_identifier}/{field name}"
+}
 

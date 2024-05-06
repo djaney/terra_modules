@@ -1,0 +1,1 @@
+Use RDS in with ECS Fargate. Integrate credentials using SSM ARN

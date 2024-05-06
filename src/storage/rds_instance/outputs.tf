@@ -5,17 +5,17 @@ output endpoint {
     depends_on  = [aws_db_instance.db]
 }
 
-output username {
-    value       = aws_db_instance.db.username
+output username_ssm_arn {
+    value       = aws_ssm_parameter.db_username.arn
     sensitive   = false
-    description = "Username"
+    description = "Username SSM ARN"
     depends_on  = [aws_db_instance.db]
-    }
+}
 
-output password {
-  value       = aws_db_instance.db.password
+output password_ssm_arn {
+  value       = aws_ssm_parameter.db_password.arn
   sensitive   = true
-  description = "address:port"
+  description = "Password SSM ARN"
   depends_on  = [aws_db_instance.db]
 }
 

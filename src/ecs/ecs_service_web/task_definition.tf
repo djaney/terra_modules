@@ -8,7 +8,7 @@ resource "aws_iam_role" "execution" {
             Version   = "2012-10-17"
             Statement = [
                 {
-                    Action   = ["logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogGroup"]
+                    Action   = ["logs:CreateLogStream", "logs:PutLogEvents", "logs:CreateLogGroup", "ssm:GetParameters"]
                     Effect   = "Allow"
                     Resource = "*"
                 },

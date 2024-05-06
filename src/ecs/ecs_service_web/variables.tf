@@ -47,10 +47,10 @@ variable "environment" {
 variable "secrets" {
     type = list(object({
         name  = string
-        value = string
+        valueFrom = string
     }))
     default     = []
-    description = "Also creates environment variable but value is secrets manager or ssm parameter arn"
+    description = "valueFrom is ARN of SSM parameter"
 }
 
 variable "load_balancer_arn" {
