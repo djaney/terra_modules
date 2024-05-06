@@ -80,7 +80,6 @@ module "service" {
     task_memory       = 512
     container_port    = 8080
     task_role_arn     = aws_iam_role.task_role.arn
-    load_balancer_arn = module.balancer.alb_arn
     fargate           = false
     http              = {
         priority     = 1

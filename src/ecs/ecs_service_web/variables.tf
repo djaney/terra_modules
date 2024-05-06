@@ -53,10 +53,6 @@ variable "secrets" {
     description = "valueFrom is ARN of SSM parameter"
 }
 
-variable "load_balancer_arn" {
-    type = string
-}
-
 variable "health_check" {
     type = object({
         path                = string
