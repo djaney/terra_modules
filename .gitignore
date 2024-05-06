@@ -3,8 +3,8 @@
 *.tfstate
 *.tfstate.backup
 !.terraform.docs.yml
-/docs/docs/*
-!/docs/docs/.gitkeep
-/docs/examples/*
-!/docs/examples/.gitkeep
+/docs/_docs/*
+!/docs/_docs/.gitkeep
+/docs/_examples/*
+!/docs/_examples/.gitkeep
 _site

@@ -1,7 +1,3 @@
----
-title:  Simple web service
-permalink: /ecs/ecs_service_web/
----
 - Create ECS web service
 - Attach to listener
 

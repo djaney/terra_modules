@@ -1,3 +1,0 @@
----
-title:  ECS using Fargate
----

@@ -3,9 +3,17 @@ layout: default
 ---
 
 {{content}}
-{% assign pages = site.pages | where_exp: 'page', 'page.title' %}
+<h2>Docs</h2>
 <ul>
-  {% for page in pages %}
-    <li><a href="{{ site.baseurl }}{{ page.permalink }}">{{ page.title }}</a></li>
+  {% for page in site.docs %}
+    <li><a href="{{ site.baseurl }}/{{ page.permalink }}">{{ page.title }}</a></li>
+  {% endfor %}
+</ul>
+
+
+<h2>Examples</h2>
+<ul>
+  {% for page in site.examples %}
+    <li><a href="{{ site.baseurl }}/{{ page.permalink }}">{{ page.title }}</a></li>
   {% endfor %}
 </ul>
