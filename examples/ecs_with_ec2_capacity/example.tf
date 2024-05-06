@@ -21,7 +21,7 @@ module "nat" {
 
 # Add capacity provider
 module "cluster" {
-    source       = "../../src/ecs/ecs_ec2_cluster"
+    source       = "../../src/ecs/ecs_cluster_ec2"
     vpc_id       = module.vpc.vpc_id
     cluster_name = "test-cluster"
     asg_scaling  = {
