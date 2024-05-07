@@ -3,5 +3,5 @@ output "target_group_arn" {
 }
 
 output "service_id" {
-    value = var.fargate ? aws_ecs_service.fargate.id : aws_ecs_service.ec2.id
+    value = var.fargate ? aws_ecs_service.fargate[0].id : aws_ecs_service.ec2[0].id
 }
